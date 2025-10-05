@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechGadgets - Business Catalog</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #007bff;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            text-align: center;
+            padding: 150px 0 100px; /* Adjusted for fixed header */
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+        }
+
+        /* Catalog Section */
+        .catalog {
+            padding: 50px 0;
+        }
+        .catalog h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        .filters {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .filters select, .filters input {
+            padding: 10px;
+            margin: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .product-card h3 {
+            margin: 1rem 0 0.5rem;
+            color: #007bff;
+        }
+        .product-card p {
+            margin-bottom: 1rem;
+        }
+        .price {
+            font-size: 1.5rem;
+            color: #28a745;
+            font-weight: bold;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .filters select, .filters input {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#catalog">Catalog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Welcome to TechGadgets Business Catalog</h1>
+            <p>Discover our premium electronics and gadgets for your business needs. Browse our catalog below!</p>
+        </div>
+    </section>
+
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <h2>Our Product Catalog</h2>
+            <div class="filters">
+                <input type="text" id="search" placeholder="Search products...">
+                <select id="category">
+                    <option value="">All Categories</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="phones">Phones</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+            <div id="products-grid" class="products-grid">
+                <!-- Products will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2023 TechGadgets Inc. | Email: info@techgadgets.com | Phone: (123) 456-7890</p>
+            <p>Address: 123 Business St, City, State 12345</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data (customize this array for your business catalog)
+        const products = [
+            { id: 1, name: "Dell XPS Laptop", price: "$999", category: "laptops", image: "https://via.placeholder.com/250x200?text=Dell+XPS", description: "High-performance laptop for business." },
+            { id: 2, name: "iPhone 14 Pro", price: "$1099", category: "phones", image: "https://via.placeholder.com/250x200?text=iPhone+14", description: "Latest smartphone with advanced features." },
+            { id: 3, name: "Wireless Mouse", price: "$29", category: "accessories", image: "https://via.placeholder.com/250x200?text=Wireless+Mouse", description: "Ergonomic mouse for productivity." },
+            { id: 4, name: "HP Pavilion Laptop", price: "$799", category: "laptops", image: "https://via.placeholder.com/250x200?text=HP+Pavilion", description: "Reliable laptop for everyday use." },
+            { id: 5, name: "Samsung Galaxy S23", price: "$899", category: "phones", image: "https://via.placeholder.com/250x200?text=Galaxy+S23", description: "Android powerhouse for professionals." },
+            { id: 6, name: "USB-C Hub", price: "$49", category: "accessories", image: "https://via.placeholder.com/250x200?text=USB-C+Hub", description: "Multi-port hub for connectivity." }
+        ];
+
+        // Function to render products
+        function renderProducts(filteredProducts) {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+            filteredProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <div class="price">${product.price}</div>
+                    <a href="#" class="btn">Add to Cart</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter products based on search and category
+        function filterProducts() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const category = document.getElementById('category').value;
+            const filtered = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) &&
+                (category === '' || product.category === category)
+            );
+            renderProducts(filtered);
+        }
+
+        // Event listeners
+        document.getElementById('search').addEventListener('input', filterProducts);
+        document.getElementById('category').addEventListener('change', filterProducts);
+
+        // Initial render
+        renderProducts(products);
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
